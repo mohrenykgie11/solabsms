@@ -102,19 +102,18 @@ export default {
         axios
           .post("https://solabsms.herokuapp.com/api/users/login", loginData)
           .then(({ data }) => {
-            console.log('[loginData]',data);
-            console.log("[]");
+            console.log('[loginData]',data)
             
             
-            if (data.hasError == true) {
+            if (data.confirmation !== 'success') {
               this.$Progress.fail();
               this.submitted = true;
               this.error = data.errors.message;
             }
-            if (data.hasError != true) {
+            if (data.confirmation === 'success') {
               this.$Progress.finish();
-              // this.$auth.setToken(data.data.token);
-              // this.$auth.setAuthUser(data.data.user.name);
+              this.$auth.setToken(data.jwtToken);
+              this.$auth.setAuthUser(data.user.name);
               this.$router.go({ path: "dashboard" });
             }
           })

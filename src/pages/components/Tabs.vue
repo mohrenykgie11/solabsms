@@ -144,18 +144,23 @@
   </div>
 </template>
 <script>
-import { Card, Tabs, TabPane } from '@/components';
+import { Card, Tabs, TabPane, Parallax } from '@/components';
 
 export default {
   components: {
+    Parallax,
     Card,
     Tabs,
     TabPane
   }
 };
 </script>
-<style>
+
+<style scoped>
 .tab-content.tab-content-padding {
   padding: 20px;
 }
+/* .container{
+  background-image: url('img/background.7jpg');
+} */
 </style>

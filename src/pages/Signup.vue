@@ -133,13 +133,13 @@ export default {
         password:"",
         country:"Nigeria"
       },
-      submitted: false, 
+      submitted: false
       // responses:[] 
     };
   },
   methods:{
     post:function(){
-      let signUpData ={
+      let data ={
         name:this.signup.name,
         username:this.signup.username,
         email:this.signup.email,
@@ -147,15 +147,20 @@ export default {
         password:this.signup.password,
         country:this.signup.country
       };
-      // try {
         axios
-          .post("https://solabsms.herokuapp.com/api/users/signup", signUpData)
+          .post("https://solabsms.herokuapp.com/api/users/signup", data)
           .then(({ data }) => {
             console.log("[myData:]",data);
-            if(this.submitted == true){
-              this.responses = data.data.responses;
-            }
-            this.submitted=true;
+            // if(this.submitted == true){
+            //   this.responses = data.data.responses;
+            // }
+            //TODO: this code never gets here i know
+            if(data.confirmation === 'success, new user created')
+            {
+              console.log('we won');
+              
+              this.submitted = true;
+            }//maybe we should redirect to login
           })
           .catch(error => console.log('my error',error));      
     }

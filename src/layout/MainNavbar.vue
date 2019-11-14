@@ -25,7 +25,6 @@
                 <a
                 class="nav-link"
                 href="/"
-                target="_blank"
                 >
                 <p>Home</p>
                 </a>
@@ -34,7 +33,6 @@
                 <a
                 class="nav-link"
                 href="#"
-                target="_blank"
                 >
                 <p>Features</p>
                 </a>
@@ -43,7 +41,6 @@
                 <a
                 class="nav-link"
                 href="#"
-                target="_blank"
                 >
                 <p>Payment & Pricing</p>
                 </a>
