@@ -11,6 +11,7 @@ import App from './App.vue';
 import router from './router';
 import NowUiKit from './plugins/now-ui-kit';
 import Auth from './config/Auth';
+import $ from 'jquery';
 import VueProgressBar from 'vue-progressbar'
 import axios from 'axios'
 
@@ -40,6 +41,7 @@ Vue.use(axios);
 Vue.use(Auth);
 Vue.use(VueProgressBar, options);
 
+window.$ = window.jQuery = $;
 Vue.config.productionTip = false;
 new Vue({
   router,
