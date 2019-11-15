@@ -154,13 +154,13 @@ export default {
             // if(this.submitted == true){
             //   this.responses = data.data.responses;
             // }
-            //TODO: this code never gets here i know
+            //
             if(data.confirmation === 'success, new user created')
             {
               console.log('we won');
               
               this.submitted = true;
-            }//maybe we should redirect to login
+            }
           })
           .catch(error => console.log('my error',error));      
     }
