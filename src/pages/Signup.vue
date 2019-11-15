@@ -150,17 +150,14 @@ export default {
         axios
           .post("https://solabsms.herokuapp.com/api/users/signup", data)
           .then(({ data }) => {
-            console.log("[myData:]",data);
-            // if(this.submitted == true){
-            //   this.responses = data.data.responses;
-            // }
-            //TODO: this code never gets here i know
-            if(data.confirmation === 'success, new user created')
-            {
-              console.log('we won');
-              
+            // This portion wokrs fine
+            if(data.confirmation === 'success, new user created'){
               this.submitted = true;
-            }//maybe we should redirect to login
+              setTimeout(() => {
+                this.$router.push({ name: "login" });
+              } ,1500)
+            }
+
           })
           .catch(error => console.log('my error',error));      
     }
