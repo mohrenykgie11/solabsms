@@ -102,9 +102,6 @@ export default {
         axios
           .post("https://solabsms.herokuapp.com/api/users/login", loginData)
           .then(({ data }) => {
-            console.log('[loginData]',data)
-            
-            
             if (data.confirmation !== 'success') {
               this.$Progress.fail();
               this.submitted = true;
@@ -114,7 +111,7 @@ export default {
               this.$Progress.finish();
               this.$auth.setToken(data.jwtToken);
               this.$auth.setAuthUser(data.user.name);
-              this.$router.go({ path: "dashboard" });
+              this.$router.push({ name: "dashboard" });
             }
           })
           .catch(error => console.log(error));

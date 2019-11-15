@@ -94,10 +94,10 @@
           </div>
         </card>
       </div>
-      <div class="success" v-if="submitted">
+      <!-- <div class="success" v-if="submitted">
         <h3>You have successfully registered.<br></h3>
         <h3>You may log in using details provided</h3>
-      </div>
+      </div> -->
       <div class="col text-center">
         <router-link
           to="/login"
@@ -134,7 +134,6 @@ export default {
         country:"Nigeria"
       },
       submitted: false
-      // responses:[] 
     };
   },
   methods:{
@@ -150,28 +149,18 @@ export default {
         axios
           .post("https://solabsms.herokuapp.com/api/users/signup", data)
           .then(({ data }) => {
-            console.log("[myData:]",data);
-            // if(this.submitted == true){
-            //   this.responses = data.data.responses;
-            // }
-            //
-            if(data.confirmation === 'success, new user created')
-            {
-              console.log('we won');
-              
+            // redirect to login if signup is successful
+            if(data.confirmation === 'success, new user created'){
               this.submitted = true;
+              setTimeout(() => {
+                this.$router.push({ name: "login" });
+              } ,1500)
             }
+
           })
           .catch(error => console.log('my error',error));      
     }
   },
-  // created(){
-    // this.$http.get('https://solabsms.herokuapp.com/users/signup').then(function(data)){
-    //   console.log(data);
-    //   this.responses = data.body.slice(0,10);
-    // }
-    // this.post();
-  // }
 };
 </script>
 <style scoped>
