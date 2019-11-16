@@ -8,7 +8,7 @@
         id="accordionSidebar"
        >
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
           <div class="sidebar-brand-icon ">
             <img src="../assets/img/solablogo.png" width="40" height="40" />
           </div>
@@ -299,7 +299,9 @@
           <!-- <router-view>
             <mainDashboard/>
           </router-view> -->
-          <main-dashboard></main-dashboard>
+          <!-- <main-dashboard></main-dashboard> -->
+          <!-- <create-phonebook></create-phonebook> -->
+          <bulk-sms></bulk-sms>
 
             <!-- set progressbar -->
         <vue-progress-bar></vue-progress-bar>
@@ -349,16 +351,19 @@
 <script>
 import axios from "axios";
 import mainDashboard from '@/dashboard/mainDashboard';
+import createPhonebook from '@/dashboard/Phonebook/createPhonebook';
+import bulkSms from '@/dashboard/sendMessage/bulkSms';
 import { Card, FormGroupInput, Button } from '@/components';
 
 export default {
   name: "dashboard",
   components: {
-    mainDashboard
+    mainDashboard,
+    createPhonebook,
+    bulkSms
   },
   data() {
-    return {
-      
+    return {  
       user:"",
       image:"",
       dialog: false
@@ -428,22 +433,22 @@ export default {
       });
     });
   },
-  methods: {
-    logout() {
-      try {
-        let header = { Authorization: "Bearer " + this.$auth.getToken() };
-        axios
-          .post("https://solabsms.herokuapp.com/api/users/logout", { headers: header })
-          .then(res => {
-            this.$auth.destroyToken();
-            this.$auth.destroyUser();
-            this.$router.go("/");
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  },
+  // methods: {
+  //   logout() {
+  //     try {
+  //       let header = { Authorization: "Bearer " + this.$auth.getToken() };
+  //       axios
+  //         .post("https://solabsms.herokuapp.com/api/users/logout", { headers: header })
+  //         .then(res => {
+  //           this.$auth.destroyToken();
+  //           this.$auth.destroyUser();
+  //           this.$router.go("/");
+  //         });
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  // },
   created() {
     this.isAuth = this.$auth.isAuthenticated();
     this.user = this.$auth.getAuthUser();

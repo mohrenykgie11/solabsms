@@ -89,15 +89,6 @@ export default {
         password:this.login.password
       };
       
-      // axios
-      //   .post("https://solabsms.herokuapp.com/api/users/login", data)
-      //   .then(({ data }) => {
-      //     console.log(data)
-      //     this.submitted=true
-      //   })
-      //   .catch(error=>{
-      //     console.log(error)
-      //   });
         this.$Progress.start();
         axios
           .post("https://solabsms.herokuapp.com/api/users/login", loginData)

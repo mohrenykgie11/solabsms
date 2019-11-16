@@ -7,8 +7,8 @@
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
         <div class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-          <p>Main Balance:{{totBal}} units</p>
-          <p>Total Balance:{{totBal}} units</p>
+          <p>Main Balance: {{totBal}} units</p>
+          <p>Total Balance: {{totBal}} units</p>
         </div>
       </div>
 
@@ -38,7 +38,7 @@
           <div class="card border-left-success shadow h-100 py-2">
             <div class="card-body">
               <div class="h5 mb-0 font-weight-bold text-gray-800">{{totalMsg}}</div>
-              <p>Send Messages Today</p>
+              <p>Sent Messages Today</p>
               <router-link to="/">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
@@ -123,29 +123,16 @@ export default {
   data() {
     return {
       dialog: false,
-      bal: "",
       totBal: "",
-      totMsg: "",
-      conatct: "",
+      totalMsg: "",
+      contact: "",
       referred: "",
       earned: "",
-    //   datasets: [
-    //     {
-    //       data: [],
-    //       backgroundColor: [
-    //       ]
-    //     }
-    //   ],
-    //   option: {
-    //     title: {
-    //       display: true,
-    //       position: "bottom",
-    //       text: "Partners"
-    //     }
-    //   },
+    
     };
   },
-  mounted() {
+  methods: {
+    totalBal() {
       this.dialog = true;
       let header = { Authorization: "Bearer " + this.$auth.getToken() };
       axios
@@ -158,35 +145,27 @@ export default {
             }
           })
           .catch(error => console.log(error));
+    },
+    totalMessage(){
+      this.dialog = true;
+      let header = { Authorization: "Bearer " + this.$auth.getToken() };
+      axios
+          .get("https://solabsms.herokuapp.com/api/users/messages_today", { headers: header })
+          .then(({ data }) => {
+            console.log(data);  
+            this.totalMsg = data.number_of_messages;
+            this.dialog = false
+          })
+          .catch(error => console.log(error));
+    }
   },
-//   methods: {
-//     totalBal() {
-//       this.dialog = true
-//       try {
-//         let header = { Authorization: "Bearer " + this.$auth.getToken() };
-
-//         axios
-//           .get(
-//             "https://solabsms.herokuapp.com/api/users/balance",
-//             {},
-//             { headers: header }
-//           )
-//           .then(({ data }) => {
-//             console.log(data);
-//             if (data.confirmation === 'success') {
-//               this.totBal = data.balance;
-//               this.dialog = false
-//             }
-//           });
-//       } catch (error) {
-//         console.log(error);
-//         this.dialog = false
-//       }
-//     },
-//   },
-//   created() {
-//     this.totalBal();
-//   }
+  created() {
+    this.totalBal();
+    
+  },
+    mounted(){
+        this.totalMessage();
+    }
 };
 </script>
 
