@@ -32,6 +32,12 @@ export default new Router({
       }
     },
     {
+      path: '/dashboard',
+      name: 'dashboard',
+      components: mainDashboard,
+      meta: { forAuth: true }
+    },
+    {
       path: '/landing',
       name: 'landing',
       components: { default: Landing, header: MainNavbar, footer: MainFooter },
@@ -65,12 +71,6 @@ export default new Router({
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: 'black' }
       }
-    },
-    {
-      path: '/dashboard',
-      name: 'dashboard',
-      components: mainDashboard,
-      meta: { forAuth: true }
     },
     {
       path: '/phonebook',

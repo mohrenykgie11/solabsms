@@ -11,6 +11,10 @@ import App from './App.vue';
 import router from './router';
 import NowUiKit from './plugins/now-ui-kit';
 import Auth from './config/Auth';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import BootstrapVue from 'bootstrap-vue';
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 import $ from 'jquery';
 import VueProgressBar from 'vue-progressbar'
 import axios from 'axios'
@@ -44,6 +48,25 @@ Vue.use(NowUiKit);
 Vue.use(axios);
 Vue.use(Auth);
 Vue.use(VueProgressBar, options);
+Vue.use(BootstrapVue);
+
+router.beforeEach(
+  (to, from, next) => {
+    if (to.matched.some(record => record.meta.forVisitors)) {
+      if (Vue.auth.isAuthenticated()) {
+        next({
+          path: '/dashboard'
+        })
+      } else next()
+    } else if (to.matched.some(record => record.meta.forAuth)) {
+      if (!Vue.auth.isAuthenticated()) {
+        next({
+          path: '/'
+        })
+      } else next()
+    } else next()
+  }
+)
 
 window.$ = window.jQuery = $;
 Vue.config.productionTip = false;
@@ -51,5 +74,5 @@ new Vue({
   router,
   mode: 'history',
   render: h => h(App),
-  router:router
+  // router: router
 }).$mount('#app');

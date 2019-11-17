@@ -81,14 +81,14 @@
         </li>
 
         <!-- Divider -->
-        <hr class="sidebar-divider">
+        <hr class="sidebar-divider d-none d-md-block">
 
         <li class="nav-item">
           <a
             class="nav-link collapsed"
             href="#"
             data-toggle="collapse"
-            data-target="#campaignTwo"
+            data-target="#mediaThree"
             aria-expanded="true"
             aria-controls="collapseTwo"
           >
@@ -96,7 +96,7 @@
             <span>Numbers</span>
           </a>
           <div
-            id="campaignTwo"
+            id="mediaThree"
             class="collapse"
             aria-labelledby="headingTwo"
             data-parent="#accordionSidebar"
@@ -117,7 +117,7 @@
         </li>
 
         <!-- Divider -->
-        <hr class="sidebar-divider">
+        <hr class="sidebar-divider d-none d-md-block">
 
         <!-- Nav Item - Single link without dropdown -->
         <li class="nav-item">
@@ -136,7 +136,7 @@
             class="nav-link collapsed"
             href="#"
             data-toggle="collapse"
-            data-target="#campaignTwo"
+            data-target="#mediaTwo"
             aria-expanded="true"
             aria-controls="collapseTwo"
           >
@@ -144,7 +144,7 @@
             <span>Phonebook</span>
           </a>
           <div
-            id="campaignTwo"
+            id="mediaTwo"
             class="collapse"
             aria-labelledby="headingTwo"
             data-parent="#accordionSidebar"
@@ -172,7 +172,7 @@
             class="nav-link collapsed"
             href="#"
             data-toggle="collapse"
-            data-target="#campaignTwo"
+            data-target="#mediaOne"
             aria-expanded="true"
             aria-controls="collapseTwo"
           >
@@ -180,7 +180,7 @@
             <span>Logs</span>
           </a>
           <div
-            id="campaignTwo"
+            id="mediaOne"
             class="collapse"
             aria-labelledby="headingTwo"
             data-parent="#accordionSidebar"
@@ -276,10 +276,10 @@
                   aria-expanded="false"
                 >
                   <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user}}</span>
-                  <!-- <img
+                  <img
                     class="img-profile rounded-circle"
                     v-bind:src="image"
-                  > -->
+                  >
                 </a>
                 <!-- Dropdown - User Information -->
                 <div
@@ -364,12 +364,14 @@ import axios from "axios";
 import MainFooter from '@/layout/MainFooter';
 
 export default {
-  name: "App",
+  // name: "App",
+  name: "dashboard",
   components: {
     MainFooter,
   },
   data() {
-    return {  
+    return { 
+      isAuth: null, 
       user:"",
       dialog: false
     };
