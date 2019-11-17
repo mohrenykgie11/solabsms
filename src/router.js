@@ -8,18 +8,23 @@ import Profile from './pages/Profile.vue';
 import MainNavbar from './layout/MainNavbar.vue';
 import StarterFooter from './layout/StarterFooter.vue';
 import MainFooter from './layout/MainFooter.vue';
-import Sidebar from './dashboard/Sidebar.vue';
+import createPhonebook from './dashboard/Phonebook/createPhonebook.vue';
+import bulkSms from './dashboard/sendMessage/bulkSms.vue';
+import mainDashboard from './dashboard/mainDashboard.vue';
+// import Sidebar from './dashboard/Sidebar.vue';
 Vue.use(Router);
 
 export default new Router({
   mode: 'history',
-  hashbang: false,
-  linkExactActiveClass: 'active',
+  // hashbang: false,
+  // linkExactActiveClass: 'active',
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
       name: 'index',
       components: { default: Index, header: MainNavbar, sfooter: StarterFooter, footer: MainFooter },
+      meta: { forVisitors: true },
       props: {
         header: { colorOnScroll: 400 },
         // sfooter: { backgroundColor: 'black' },
@@ -64,17 +69,27 @@ export default new Router({
     {
       path: '/dashboard',
       name: 'dashboard',
-      components: { default: Sidebar, footer: MainFooter },
-      props: {
-        footer: { backgroundColor: 'orange' }
-      }
+      components: mainDashboard,
+      meta: { forAuth: true }
+    },
+    {
+      path: '/phonebook',
+      name: 'phonebook',
+      components: createPhonebook,
+      meta: { forAuth: true }
+    },
+    {
+      path: '/message',
+      name: 'message',
+      components: bulkSms,
+      meta: { forAuth: true }
     }
-  ],
-  scrollBehavior: to => {
-    if (to.hash) {
-      return { selector: to.hash };
-    } else {
-      return { x: 0, y: 0 };
-    }
-  }
+  ]
+  // scrollBehavior: to => {
+  //   if (to.hash) {
+  //     return { selector: to.hash };
+  //   } else {
+  //     return { x: 0, y: 0 };
+  //   }
+  // }
 });

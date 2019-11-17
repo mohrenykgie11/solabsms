@@ -19,8 +19,12 @@ import axios from 'axios'
 
 
 //styles
-// import './assets/vendor/fontawesome-free/css/all.min.css'
-// import './assets/css/sb-admin-2.css';
+import './assets/vendor/fontawesome-free/css/all.min.css'
+import './assets/css/sb-admin-2.css';
+
+//js
+import '@/assets/vendor/jquery/jquery.js'   //bootstrap core js
+import '@/assets/vendor/bootstrap/js/bootstrap.min.js'
 
 const options = {
   color: '#green',
