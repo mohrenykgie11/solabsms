@@ -49,7 +49,7 @@ export default {
     return {
       phonebook: {
           groupName:"",
-          contacts:"",
+          contacts:[],
           customMessage:""
       },
       submitted: false,
@@ -59,15 +59,21 @@ export default {
   methods:{
     post:function(){
       let phonebookData ={
-        name:this.phonebook.name,
-        password:this.phonebook.contact
+        groupName:this.phonebook.groupName,
+        contacts:this.phonebook.contacts.split(","),
+        customMessage:this.phonebook.customMessage
       };
-      
-        this.$Progress.start();
-        let header = { Authorization: "Bearer " + this.$auth.getToken() };
+      let header = {
+                    headers:{
+                      'Content-Type': 'application/json',
+                      Authorization: "Bearer " + this.$auth.getToken() 
+                    },
+                  };
+      this.$Progress.start();
         axios
-          .post("https://solabsms.herokuapp.com/api/users/new_group", phonebookData)
+          .post("https://solabsms.herokuapp.com/api/users/new_group", phonebookData, header)
           .then(({ data }) => {
+            console.log(data);
             if (data.confirmation !== 'success, a new contacts group was created') {
               this.$Progress.fail();
               this.submitted = true;
@@ -75,7 +81,7 @@ export default {
             }
             if (data.confirmation === 'success, a new contacts group was created') {
               this.$Progress.finish();
-              this.$router.push({ name: "index" });
+              this.$router.push({ name: "dashboard" });
             }
           })
           .catch(error => console.log(error));

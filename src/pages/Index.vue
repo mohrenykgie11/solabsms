@@ -74,7 +74,7 @@ import ExamplesSection from './components/ExamplesSection';
 import DownloadSection from './components/DownloadSection';
 
 export default {
-  name: 'App',
+  name: 'dashboard',
   bodyClass: 'index-page',
   components: {
     Parallax,

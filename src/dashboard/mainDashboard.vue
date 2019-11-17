@@ -39,7 +39,7 @@
             <div class="card-body">
               <div class="h5 mb-0 font-weight-bold text-gray-800">{{totalMsg}}</div>
               <p>Sent Messages Today</p>
-              <router-link to="/">
+              <router-link to="/message/bulksms">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                     <div
@@ -57,7 +57,7 @@
           <div class="card border-left-success shadow h-100 py-2">
             <div class="card-body">
               <p>Personalized Message</p>
-              <router-link to="/">
+              <router-link to="/message/bulksms">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                     <div
@@ -76,7 +76,7 @@
             <div class="card-body">
               <div class="h5 mb-0 font-weight-bold text-gray-800">{{contact}}</div>
               <p>Contact Groups</p>
-              <router-link to="/">
+              <router-link to="/phonebook/upload">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                     <div
@@ -108,6 +108,8 @@
           </div>
         </div>
 
+      <BlockUI :message="'Loading page...'" v-if="dialog" ></BlockUI>
+
       </div>
 
     </div>
@@ -120,6 +122,10 @@
 import axios from "axios";
 //import imageIcon from '../../public/favicon';
 export default {
+  mounted(){
+    this.totalBal();
+    this.totalMessage();
+  },
   data() {
     return {
       dialog: false,
@@ -144,7 +150,8 @@ export default {
               this.dialog = false
             }
           })
-          .catch(error => console.log(error));
+          .catch(error => console.log(error)); 
+          this.dialog = false
     },
     totalMessage(){
       this.dialog = true;
@@ -152,20 +159,14 @@ export default {
       axios
           .get("https://solabsms.herokuapp.com/api/users/messages_today", { headers: header })
           .then(({ data }) => {
-            console.log(data);  
+            console.log('thisMessage',data);  
             this.totalMsg = data.number_of_messages;
             this.dialog = false
           })
-          .catch(error => console.log(error));
+          .catch(error => console.log(error.message));
+          this.dialog = false
     }
   },
-  created() {
-    this.totalBal();
-    
-  },
-    mounted(){
-        this.totalMessage();
-    }
 };
 </script>
 

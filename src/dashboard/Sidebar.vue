@@ -56,11 +56,11 @@
           >
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Message options:</h6>
-              <router-link tag="a" class="collapse-item" to="/">
+              <router-link tag="a" class="collapse-item" to="/message/bulksms">
                 <a>Send Bulk SMS</a>
               </router-link>
               <router-link tag="a" class="collapse-item" to="/">
-                <a>Send SMS to Demography</a>
+                <a>SMS to Demography</a>
               </router-link>
               <router-link tag="a" class="collapse-item" to="/">
                 <a>Send Personalized SMS</a>
@@ -81,7 +81,7 @@
             class="nav-link collapsed"
             href="#"
             data-toggle="collapse"
-            data-target="#campaignTwo"
+            data-target="#mediaThree"
             aria-expanded="true"
             aria-controls="collapseTwo"
           >
@@ -89,7 +89,7 @@
             <span>Numbers</span>
           </a>
           <div
-            id="campaignTwo"
+            id="mediaThree"
             class="collapse"
             aria-labelledby="headingTwo"
             data-parent="#accordionSidebar"
@@ -129,7 +129,7 @@
             class="nav-link collapsed"
             href="#"
             data-toggle="collapse"
-            data-target="#campaignTwo"
+            data-target="#mediaTwo"
             aria-expanded="true"
             aria-controls="collapseTwo"
           >
@@ -137,7 +137,7 @@
             <span>Phonebook</span>
           </a>
           <div
-            id="campaignTwo"
+            id="mediaTwo"
             class="collapse"
             aria-labelledby="headingTwo"
             data-parent="#accordionSidebar"
@@ -165,7 +165,7 @@
             class="nav-link collapsed"
             href="#"
             data-toggle="collapse"
-            data-target="#campaignTwo"
+            data-target="#mediaOne"
             aria-expanded="true"
             aria-controls="collapseTwo"
           >
@@ -173,7 +173,7 @@
             <span>Logs</span>
           </a>
           <div
-            id="campaignTwo"
+            id="mediaOne"
             class="collapse"
             aria-labelledby="headingTwo"
             data-parent="#accordionSidebar"
@@ -296,12 +296,11 @@
           </nav>
           <!-- End of Topbar -->
 
-          <!-- <router-view>
-            <mainDashboard/>
-          </router-view> -->
-          <!-- <main-dashboard></main-dashboard> -->
+          <router-view>
+          </router-view>
+          <main-dashboard></main-dashboard>
           <!-- <create-phonebook></create-phonebook> -->
-          <bulk-sms></bulk-sms>
+          <!-- <bulk-sms></bulk-sms> -->
 
             <!-- set progressbar -->
         <vue-progress-bar></vue-progress-bar>
