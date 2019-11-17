@@ -31,14 +31,52 @@ export default new Router({
         footer: { backgroundColor: 'black' }
       }
     },
+    // {
+    //   path: '/dashboard',
+    //   name: 'dashboard',
+    //   components: { default: Sidebar, footer: MainFooter },
+    //   meta: { forAuth: true },
+    //   props: {
+    //     footer: { backgroundColor: 'orange' }
+    //   }
+    // },
     {
       path: '/dashboard',
       name: 'dashboard',
-      components: { default: Sidebar, footer: MainFooter },
-      meta: { forAuth: true },
-      props: {
-        footer: { backgroundColor: 'orange' }
-      }
+      component: Sidebar,
+      children: [
+        {
+          path: '/main',
+          name: 'main',
+          components: {
+            default: () => mainDashboard
+          },
+          meta: {
+            forAuth: true
+          },
+        },
+        {
+          path: '/message',
+          name: 'message',
+          components: {
+            bulkSms
+          },
+          meta: {
+            forAuth: true
+          },
+        },
+        {
+          path: '/contact',
+          name: 'contact',
+          components: {
+            createPhonebook
+          },
+          meta: {
+            forAuth: true
+          },
+        },
+      ]
+
     },
     // {
     //   path: '/dashboard/main',

@@ -56,7 +56,7 @@
           >
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Message options:</h6>
-              <router-link tag="a" class="collapse-item" to="/message/bulksms">
+              <router-link tag="a" class="collapse-item" to="/message">
                 <a>Send Bulk SMS</a>
               </router-link>
               <router-link tag="a" class="collapse-item" to="/">
@@ -143,7 +143,7 @@
             data-parent="#accordionSidebar"
           >
             <div class="bg-white py-2 collapse-inner rounded">
-              <router-link tag="a" class="collapse-item" to="/">
+              <router-link tag="a" class="collapse-item" to="/contact">
                 <a>create Phonebook</a>
               </router-link>
               <router-link tag="a" class="collapse-item" to="/">
@@ -298,7 +298,7 @@
 
           <router-view>
           </router-view>
-          <main-dashboard></main-dashboard>
+          <!-- <main-dashboard></main-dashboard> -->
           <!-- <create-phonebook></create-phonebook> -->
           <!-- <bulk-sms></bulk-sms> -->
 
