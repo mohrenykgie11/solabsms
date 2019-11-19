@@ -10,15 +10,15 @@ import StarterFooter from './layout/StarterFooter.vue';
 import MainFooter from './layout/MainFooter.vue';
 import createPhonebook from './dashboard/Phonebook/createPhonebook.vue';
 import bulkSms from './dashboard/sendMessage/bulkSms.vue';
-// import mainDashboard from './dashboard/mainDashboard.vue';
+import mainDashboard from './dashboard/mainDashboard.vue';
 import Sidebar from './dashboard/Sidebar.vue';
+import makePayment from './dashboard/makePayment.vue';
 Vue.use(Router);
 
 export default new Router({
   mode: 'history',
   hashbang: false,
   linkExactActiveClass: 'active',
-  // base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -42,15 +42,15 @@ export default new Router({
     // },
     {
       path: '/dashboard',
-      name: 'dashboard',
-      component: Sidebar,
+      component: Sidebar, footer: MainFooter,
+      props: {
+        footer: { backgroundColor: 'orange' }
+      },
       children: [
         {
-          path: '/main',
-          name: 'main',
-          components: {
-            default: () => mainDashboard
-          },
+          path: '/',
+          name: 'dashboard',
+          component: mainDashboard,
           meta: {
             forAuth: true
           },
@@ -58,9 +58,7 @@ export default new Router({
         {
           path: '/message',
           name: 'message',
-          components: {
-            bulkSms
-          },
+          component: bulkSms,
           meta: {
             forAuth: true
           },
@@ -68,9 +66,15 @@ export default new Router({
         {
           path: '/contact',
           name: 'contact',
-          components: {
-            createPhonebook
+          component:createPhonebook,
+          meta: {
+            forAuth: true
           },
+        },
+        {
+          path: '/payment',
+          name: 'payment',
+          component:makePayment,
           meta: {
             forAuth: true
           },
@@ -78,12 +82,6 @@ export default new Router({
       ]
 
     },
-    // {
-    //   path: '/dashboard/main',
-    //   name: 'mainDashboard',
-    //   components:mainDashboard,
-    //   meta: { forAuth: true }
-    // },
     {
       path: '/landing',
       name: 'landing',
@@ -118,18 +116,6 @@ export default new Router({
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: 'black' }
       }
-    },
-    {
-      path: '/phonebook/upload',
-      name: 'phonebook',
-      components: createPhonebook,
-      meta: { forAuth: true }
-    },
-    {
-      path: '/message/bulksms',
-      name: 'message',
-      components: bulkSms,
-      meta: { forAuth: true }
     }
   ],
   scrollBehavior: to => {

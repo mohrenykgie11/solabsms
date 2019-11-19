@@ -20,7 +20,7 @@
             <div class="card-body">
               <div class="h5 mb-0 font-weight-bold text-gray-800">{{totBal}} Units</div>
               <p>Total Balance</p>
-              <router-link to="/">
+              <router-link to="/payment">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                     <div
@@ -39,7 +39,7 @@
             <div class="card-body">
               <div class="h5 mb-0 font-weight-bold text-gray-800">{{totalMsg}}</div>
               <p>Sent Messages Today</p>
-              <router-link to="/message/bulksms">
+              <router-link to="/message">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                     <div
@@ -76,7 +76,7 @@
             <div class="card-body">
               <div class="h5 mb-0 font-weight-bold text-gray-800">{{contact}}</div>
               <p>Contact Groups</p>
-              <router-link to="/phonebook/upload">
+              <router-link to="/contact">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                     <div
@@ -140,9 +140,14 @@ export default {
   methods: {
     totalBal() {
       this.dialog = true;
-      let header = { Authorization: "Bearer " + this.$auth.getToken() };
+      let header = { 
+         headers:{
+                      'Content-Type': 'application/json',
+                      Authorization: "Bearer " + this.$auth.getToken() 
+                    },
+        };
       axios
-          .get("https://solabsms.herokuapp.com/api/users/balance", { headers: header })
+          .get("https://solabsms.herokuapp.com/api/users/balance", header )
           .then(({ data }) => {
             console.log(data);  
             if (data.confirmation === 'success') {
@@ -155,9 +160,14 @@ export default {
     },
     totalMessage(){
       this.dialog = true;
-      let header = { Authorization: "Bearer " + this.$auth.getToken() };
+      let header = {
+        headers:{
+                      'Content-Type': 'application/json',
+                      Authorization: "Bearer " + this.$auth.getToken() 
+                    },
+         };
       axios
-          .get("https://solabsms.herokuapp.com/api/users/messages_today", { headers: header })
+          .get("https://solabsms.herokuapp.com/api/users/messages_today", header)
           .then(({ data }) => {
             console.log('thisMessage',data);  
             this.totalMsg = data.number_of_messages;

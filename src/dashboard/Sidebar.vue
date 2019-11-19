@@ -115,7 +115,7 @@
         <!-- Nav Item - Single link without dropdown -->
         <li class="nav-item">
          
-          <router-link tag="a" class="nav-link" to="/">
+          <router-link tag="a" class="nav-link" to="/payment">
            <i class="fas fa-fw fa-user"></i>
                 <span>Make Payment</span>
               </router-link>
@@ -298,9 +298,6 @@
 
           <router-view>
           </router-view>
-          <!-- <main-dashboard></main-dashboard> -->
-          <!-- <create-phonebook></create-phonebook> -->
-          <!-- <bulk-sms></bulk-sms> -->
 
             <!-- set progressbar -->
         <vue-progress-bar></vue-progress-bar>
@@ -345,21 +342,18 @@
         </div>
       </div>
     </div> -->
+    <main-footer></main-footer>
   </div>
 </template>
 <script>
 import axios from "axios";
-import mainDashboard from '@/dashboard/mainDashboard';
-import createPhonebook from '@/dashboard/Phonebook/createPhonebook';
-import bulkSms from '@/dashboard/sendMessage/bulkSms';
+import MainFooter from '@/layout/MainFooter';
 import { Card, FormGroupInput, Button } from '@/components';
 
 export default {
   name: "dashboard",
   components: {
-    mainDashboard,
-    createPhonebook,
-    bulkSms
+    MainFooter
   },
   data() {
     return {  

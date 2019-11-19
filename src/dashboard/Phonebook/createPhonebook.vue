@@ -13,7 +13,7 @@
         <!-- Form Card Example -->
         <div class="col-xl-4 col-md-6 mb-4">
         </div>
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-xl-3 col-md-6 mb-4" v-if="!submitted">
             <form>
                 <div>Create phonebook</div>
                 <div class="nav-item">
@@ -57,7 +57,9 @@ export default {
     };
   },
   methods:{
-    post:function(){
+    post:function(e){
+      e.preventDefault();
+  
       let phonebookData ={
         groupName:this.phonebook.groupName,
         contacts:this.phonebook.contacts.split(","),
@@ -70,16 +72,15 @@ export default {
                     },
                   };
       this.$Progress.start();
-        axios
-          .post("https://solabsms.herokuapp.com/api/users/new_group", phonebookData, header)
-          .then(({ data }) => {
+        axios.post("https://solabsms.herokuapp.com/api/users/new_group", phonebookData, header )
+          .then(data => {
             console.log(data);
-            if (data.confirmation !== 'success, a new contacts group was created') {
+            if (data.data.status !== 1) {
               this.$Progress.fail();
               this.submitted = true;
               this.error = data.errors.message;
             }
-            if (data.confirmation === 'success, a new contacts group was created') {
+           else if (data.data.status === 1) {
               this.$Progress.finish();
               this.$router.push({ name: "dashboard" });
             }
