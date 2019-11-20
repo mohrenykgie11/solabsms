@@ -1,21 +1,21 @@
-// import Vue from 'vue'
-// import App from './App.vue'
-import VueResource from 'vue-resource'
-// import VueRouter from 'vue-router'
-
-Vue.use(VueResource);
+// import VueResource from 'vue-resource'
+// Vue.use(VueResource);
 
 
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import NowUiKit from './plugins/now-ui-kit';
+import './plugins/vuetify';
 import Auth from './config/Auth';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import $ from 'jquery';
+import ToggleButton from 'vue-js-toggle-button'
+import VueSidebarMenu from 'vue-sidebar-menu'
+import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 import VueProgressBar from 'vue-progressbar'
 import axios from 'axios'
 
@@ -49,6 +49,8 @@ Vue.use(axios);
 Vue.use(Auth);
 Vue.use(VueProgressBar, options);
 Vue.use(BootstrapVue);
+Vue.use(VueSidebarMenu);
+Vue.use(ToggleButton);
 
 router.beforeEach(
   (to, from, next) => {

@@ -65,9 +65,11 @@
                     <div class="row" v-if="(merchant)">
                         <p>Please Proceed to your Mobile Banking/USSD/Internet Banking App to complete your Bank Transfer Payment with {{net}} to Solab Technologies 9098717600 (Guarantee Trust Bank (GTB)) .Click Confirm Payment only When you have completed payment</p>
                     </div>
-                    <button type="submit" class="button" v-if="!method">Proceed to Pay</button>
-                    <button type="submit" class="button" v-if="method==='bank'">Confirm Payment</button>
-                    <button type="submit" class="button" v-if="method==='online'">Proceed to Pay</button>
+                    <button type="submit" class="button" v-bind:disabled="btnDisable" v-if="!method">Proceed to Pay</button>
+                    <button @click="showModal" v-bind="btnStatus" v-bind:disabled="btnDisable" v-if="method==='bank'">Confirm Payment</button>
+                    <button @click="showModal" v-bind="btnStatus" v-bind:title="buttonTitle" v-bind:disabled="btnDisable" v-if="method==='online'">Proceed to Pay</button>
+                    <payment-modal ref="modal"></payment-modal>
+                    <bank-modal ref="modal"></bank-modal>
                 <!-- </form> -->
         </div>
 
@@ -75,22 +77,33 @@
 
     </div>
     <!-- /.container-fluid -->
+    
   </div>
   <!-- End of Main Content -->
 </template>
 
  <script>
   import axios from "axios";
+  import paymentModal from './paymentModal'
+  import bankModal from './bankModal'
   export default {
+      name:'payment',
+      components:{
+          paymentModal,
+          bankModal
+      },
     data() {
         return {
         dialog: false,
         amount:"",
         netAmount:"",
         method:"",
+        merchant:"",
         purchase:"",
+        buttonTitle: "Proceed to pay",
         charges:0,
         unit_cost:"2.0000",
+        btnDisable: true,
         submitted: false,
         error:""
         };
@@ -101,16 +114,22 @@
         },
         net(){
             return this.amount
+        },
+        btnStatus(){
+           if (this.amount > 100) {
+                this.btnDisable = false;
+            }
         }
     },
     methods:{
-        display(val){
-            let element = this.method;
-            if(val== "bank")
-                element= 'Confirm Payment';
-            else
-                element= 'Proceed to Pay';    
-        }
+        showModal() {
+            let element = this.$refs.modal.$el
+            $(element).modal('show')
+        },
+        // submit: function() {
+        //     this.$emit("inputData", this.amount);
+        //     this.tempMessage = "";
+        // }
     }
     
   }
