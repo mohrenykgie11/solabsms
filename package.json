@@ -26,7 +26,7 @@
     "vue-router": "^3.0.2",
     "vue-sidebar-menu": "^4.4.3",
     "vue2-transitions": "^0.2.3",
-    "vuetify": "^2.1.10"
+    "vuetify": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
